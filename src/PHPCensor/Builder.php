@@ -318,9 +318,8 @@ class Builder implements LoggerAwareInterface
 
         $this->commandExecutor->setBuildPath($this->buildPath);
 
-        // TODO: stub
-        $secrets = [["SOME_SECRET" => "STUB"]];
-
+        $secrets = $this->getSecrets($this->build->getProjectId());
+        // TODO: add logging
         $this->injectSecrets($secrets);
 
         // Create a working copy of the project:
@@ -444,10 +443,22 @@ class Builder implements LoggerAwareInterface
         return $pluginFactory;
     }
 
+    /**
+     * @param $secrets
+     */
     protected function injectSecrets($secrets) {
         // TODO: add logging
-        foreach ($secrets as $name => $secret) {
-           putenv($name . '=' . $secret);
+        foreach ($secrets as $secret) {
+           putenv($secret->getName() . '=' . $secret->getValue());
         }
+    }
+
+    /**
+     * @param $projectId
+     * @return mixed
+     */
+    protected function getSecrets($projectId) {
+        $secretStore = Factory::getStore("Secret", "PHPCensor");
+        return $secretStore->getByProjectId($projectId)['items'];
     }
 }
