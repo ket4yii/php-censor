@@ -310,6 +310,7 @@ class ProjectController extends PHPCensor\Controller
             'archived'            => $this->getParam('archived', 0),
             'branch'              => $this->getParam('branch', null),
             'group'               => $this->getParam('group_id', null),
+            'secrets'             => $this->getParam('secrets', null),
         ];
 
         $project = $this->projectService->updateProject($project, $title, $type, $reference, $options);
