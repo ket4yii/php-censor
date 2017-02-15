@@ -665,6 +665,18 @@ class ProjectBase extends Model
     }
 
     /**
+     * Get Secret models by ProjectId for this Project.
+     *
+     * @uses \PHPCensor\Store\SecretStore::getByProjectId()
+     * @uses \PHPCensor\Model\Secret
+     * @return \PHPCensor\Model\Secret[]
+     */
+    public function getProjectSecrets()
+    {
+        return Factory::getStore('Secret', 'PHPCensor')->getByProjectId($this->getId());
+    }
+
+    /**
      * Get BuildMeta models by ProjectId for this Project.
      *
      * @uses \PHPCensor\Store\BuildMetaStore::getByProjectId()
