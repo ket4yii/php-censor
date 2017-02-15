@@ -9,8 +9,10 @@
 
 namespace PHPCensor\Service;
 
+use b8\Store\Factory;
 use PHPCensor\Model\Project;
 use PHPCensor\Store\ProjectStore;
+use PHPCensor\Model\Secret;
 
 /**
  * The project service handles the creation, modification and deletion of projects.
@@ -91,6 +93,29 @@ class ProjectService
 
         if (array_key_exists('group', $options)) {
             $project->setGroup($options['group']);
+        }
+
+        if (array_key_exists('secrets', $options) && $options['secrets']) {
+            /**
+             * @var \PHPCensor\Store\SecretStore
+             */
+            $secretStore = Factory::getStore('Secret', 'PHPCensor');
+
+            foreach ($options['secrets'] as $secret) {
+                /**
+                 * @var \PHPCensor\Model\Secret
+                 */
+                $secretModel = new Secret();
+                $name = $secret['name'];
+                $value = $secret['value'];
+
+                // $secretModel->setValues();
+                $secretModel->setName($name);
+                $secretModel->setValue($value);
+                $secretModel->setProject($project);
+
+                $secretStore->save($secretModel);
+            }
         }
 
         // Allow certain project types to set access information:
