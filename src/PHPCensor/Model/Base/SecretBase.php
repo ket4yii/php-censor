@@ -172,8 +172,8 @@ class SecretBase extends Model
     */
     public function setId($value)
     {
-        $this->_validateNotNull('Id', $value);
-        $this->_validateInt('Id', $value);
+        $this->validateNotNull('Id', $value);
+        $this->validateInt('Id', $value);
 
         if ($this->data['id'] === $value) {
             return;
@@ -181,7 +181,7 @@ class SecretBase extends Model
 
         $this->data['id'] = $value;
 
-        $this->_setModified('id');
+        $this->setModified('id');
     }
 
     /**
@@ -192,8 +192,8 @@ class SecretBase extends Model
     */
     public function setProjectId($value)
     {
-        $this->_validateNotNull('ProjectId', $value);
-        $this->_validateInt('ProjectId', $value);
+        $this->validateNotNull('ProjectId', $value);
+        $this->validateInt('ProjectId', $value);
 
         if ($this->data['project_id'] === $value) {
             return;
@@ -201,7 +201,7 @@ class SecretBase extends Model
 
         $this->data['project_id'] = $value;
 
-        $this->_setModified('project_id');
+        $this->setModified('project_id');
     }
 
     /**
@@ -212,8 +212,8 @@ class SecretBase extends Model
     */
     public function setName($value)
     {
-        $this->_validateNotNull('Name', $value);
-        $this->_validateString('Name', $value);
+        $this->validateNotNull('Name', $value);
+        $this->validateString('Name', $value);
 
         if ($this->data['name'] === $value) {
             return;
@@ -221,7 +221,7 @@ class SecretBase extends Model
 
         $this->data['name'] = $value;
 
-        $this->_setModified('name');
+        $this->setModified('name');
     }
 
     /**
@@ -232,8 +232,8 @@ class SecretBase extends Model
     */
     public function setValue($value)
     {
-        $this->_validateNotNull('Value', $value);
-        $this->_validateString('Value', $value);
+        $this->validateNotNull('Value', $value);
+        $this->validateString('Value', $value);
 
         if ($this->data['value'] === $value) {
             return;
@@ -241,7 +241,7 @@ class SecretBase extends Model
 
         $this->data['value'] = $value;
 
-        $this->_setModified('value');
+        $this->setModified('value');
     }
 
     /**
